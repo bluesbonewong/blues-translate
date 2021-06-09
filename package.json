@@ -1,0 +1,17 @@
+{
+  "name": "blues-translate",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsnd src/main.ts"
+  },
+  "repository": "git@github.com:bluesbonewong/blues-translate.git",
+  "author": "wangruilin <bluesbonewong@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.2"
+  }
+}
