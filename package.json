@@ -2,6 +2,12 @@
   "name": "blues-translate",
   "version": "0.0.1",
   "main": "index.js",
+  "bin": {
+    "fy": "dist/cli.js"
+  },
+  "files": [
+    "dist/**/*.js"
+  ],
   "scripts": {
     "dev": "tsnd src/main.ts"
   },
