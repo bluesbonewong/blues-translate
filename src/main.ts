@@ -3,7 +3,11 @@ import * as QueryString from "querystring";
 import md5 = require("md5");
 import {appid, appSecret} from "./private";
 
-const errorMap = {
+type ErrorMap = {
+    [key: number]: string
+}
+
+const errorMap: ErrorMap = {
     52001: "请求超时",
     52002: "系统错误",
     52003: "未授权用户"
@@ -37,7 +41,7 @@ export const translate = word => {
         });
         res.on("end", () => {
             type BaiduResult = {
-                error_code?: string,
+                error_code?: number,
                 error_msg?: string,
                 from: string,
                 to: string,
