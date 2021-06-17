@@ -13,14 +13,18 @@ const errorMap: ErrorMap = {
     52003: "未授权用户"
 };
 
-export const translate = word => {
+export const translate = (word: string) => {
     const salt = Math.random();
     const sign = md5(appid + word + salt + appSecret);
+    let [from, to] = ["zh", "en"]; // 默认中译英
+
+    // 英译中
+    if (/[a-zA-Z]/.test(word[0])) [from, to] = ["en", "zh"];
 
     const query: string = QueryString.stringify({
         q: word,
-        from: "en",
-        to: "zh",
+        from,
+        to,
         appid,
         salt,
         sign
@@ -35,7 +39,7 @@ export const translate = word => {
 
     // https请求
     const req = https.request(options, (res) => {
-        let chunks = [];
+        let chunks: Buffer[] = [];
         res.on("data", chunk => {
             chunks.push(chunk);
         });

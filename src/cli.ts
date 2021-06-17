@@ -12,7 +12,7 @@ program.version("0.0.1")
         English: "英文单词"
     })
     .action(word => {
-        console.log(translate(word));
+        translate(word);
     });
 
 program.parse(process.argv); // 解析参数
