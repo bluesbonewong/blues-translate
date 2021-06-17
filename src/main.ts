@@ -7,7 +7,7 @@ export const translate = word => {
     const salt = Math.random();
     const sign = md5(appid + word + salt + appSecret);
 
-    const query: String = QueryString.stringify({
+    const query: string = QueryString.stringify({
         q: word,
         from: "en",
         to: "zh",
@@ -23,12 +23,24 @@ export const translate = word => {
         method: "GET"
     };
 
+    // https请求
     const req = https.request(options, (res) => {
-        console.log("statusCode:", res.statusCode);
-        console.log("headers:", res.headers);
+        let chunks = [];
+        res.on("data", chunk => {
+            chunks.push(chunk);
+        });
+        res.on("end", () => {
+            type BaiduResult = {
+                error_code?: string,
+                error_msg?: string,
+                from: string,
+                to: string,
+                trans_result: { src: string, dst: string }[]
+            }
 
-        res.on("data", (d) => {
-            process.stdout.write(d);
+            const str = Buffer.concat(chunks).toString();
+            const obj: BaiduResult = JSON.parse(str);
+            console.log(obj.trans_result[0].dst);
         });
     });
 
