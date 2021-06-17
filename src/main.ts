@@ -1,9 +1,10 @@
 import * as https from "https";
 import * as QueryString from "querystring";
 import md5 = require("md5");
+import {appid, appSecret} from "./private";
 
 export const translate = word => {
-    const appid = "???", appSecret = "??", salt = Math.random();
+    const salt = Math.random();
     const sign = md5(appid + word + salt + appSecret);
 
     const query: String = QueryString.stringify({
